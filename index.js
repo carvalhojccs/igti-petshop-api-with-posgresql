@@ -16,13 +16,14 @@ global.logger = winston.createLogger({
         new (winston.transports.File)({ filename: "petshop-api.log" })
     ],
     format:combine(
-        label({ label: "petshop-api" }),
+        label({ label: "petshop-api", proprietariosRouter }),
         timestamp(),
         myFormat
     )
 });
 
 //importação das rotas
+import proprietariosRouter from "./routes/proprietario.routes.js";
 
 
 //criação da instancia do express
@@ -34,9 +35,13 @@ app.use(express.json());
 //habilitar a liberação de cors
 app.use(cors());
 
+//configuração das rotas
+app.use("/proprietario", proprietariosRouter);
+
 //configurar o handdler de erro
 app.use((err, req, res, next) => {
-    logger.error(`${req.method} ${req.baseURL} - ${err.message}`);
+    console.log(req);
+    logger.error(`${req.method} ${req.baseUrl} - ${err.message}`);
     res.status(400).send({ error: err.message });
 });
 
