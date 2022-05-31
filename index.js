@@ -24,6 +24,7 @@ global.logger = winston.createLogger({
 
 //importação das rotas
 import proprietariosRouter from "./routes/proprietario.routes.js";
+import animaisRouter from "./routes/animal.routes.js";
 
 
 //criação da instancia do express
@@ -37,6 +38,7 @@ app.use(cors());
 
 //configuração das rotas
 app.use("/proprietario", proprietariosRouter);
+app.use("/animal", animaisRouter);
 
 //configurar o handdler de erro
 app.use((err, req, res, next) => {
