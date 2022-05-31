@@ -23,10 +23,26 @@ async function getOwners(){
         return res.rows;
     } catch (err) {
         throw err;
+    } finally {
+        conn.release();
+    }
+}
+
+async function getOwner(id){
+    const conn = await connect();
+
+    try {
+        const res = await conn.query("SELECT * FROM proprietarios WHERE proprietario_id = $1", [id]);
+        return res.rows[0];
+    } catch (err) {
+        throw err;
+    } finally {
+        conn.release();
     }
 }
 
 export default {
     isertOwner,
     getOwners,
+    getOwner,
 }

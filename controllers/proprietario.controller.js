@@ -24,7 +24,18 @@ async function getOwners(req, res, next){
     }
 }
 
+async function getOwner(req, res, next){
+    try {
+        const id = req.params.id;
+        res.send(await proprietarioService.getOwner(id));
+        logger.info(`GET /proprietario/:id`);
+    } catch (err) {
+        next(err);
+    }
+}
+
 export default {
     createowner,
     getOwners,
+    getOwner,
 }
