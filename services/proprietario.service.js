@@ -1,4 +1,5 @@
 import proprietarioRepository from "../repositories/proprietario.repository.js";
+import animalRepository from "../repositories/animal.repository.js";
 
 async function createOwner(proprietario){
     return await proprietarioRepository.isertOwner(proprietario);
@@ -31,7 +32,13 @@ async function deleteOwner(id){
         throw new Error("Proprietário não existe!");
     }
 
-    await proprietarioRepository.deleteOwner(id);
+    const animal = await animalRepository.getAnimalsByOwner(id);
+
+    if(animal.length > 0){
+        throw new Error(`Existe(m) ${animal.length} animal(is) pertencente(s) a este proprietário!`);
+    } else {
+        await proprietarioRepository.deleteOwner(id);
+    }    
 }
 
 export default {
