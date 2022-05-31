@@ -15,6 +15,16 @@ async function createowner(req, res, next){
     }
 }
 
+async function getOwners(req, res, next){
+    try {
+        res.send(await proprietarioService.getOwners());
+        logger.info(`GET /proprietario`);
+    } catch (err) {
+        next(err);
+    }
+}
+
 export default {
     createowner,
+    getOwners,
 }

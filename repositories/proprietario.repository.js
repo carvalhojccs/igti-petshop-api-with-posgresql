@@ -15,6 +15,18 @@ async function isertOwner(proprietario){
     }
 }
 
+async function getOwners(){
+    const conn = await connect();
+
+    try {
+        const res = await conn.query("SELECT * FROM proprietarios");
+        return res.rows;
+    } catch (err) {
+        throw err;
+    }
+}
+
 export default {
     isertOwner,
+    getOwners,
 }
