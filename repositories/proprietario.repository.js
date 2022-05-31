@@ -60,7 +60,7 @@ async function deleteOwner(id){
     const conn = await connect();
 
     try {
-        await conn.query("DELETE proprietarios WHERE proprietario_id = $1", [id]);
+        await conn.query("DELETE FROM proprietarios WHERE proprietario_id = $1", [id]);
     } catch (err) {
         throw err;
     } finally {
