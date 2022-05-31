@@ -74,7 +74,7 @@ async function deleteAnimal(id){
     const conn = await connect();
 
     try {
-        await conn.query("DELETE animais WHERE animal_id = $1", [id]);
+        await conn.query("DELETE FROM animais WHERE animal_id = $1", [id]);
     } catch (err) {
         throw err;
     } finally {
