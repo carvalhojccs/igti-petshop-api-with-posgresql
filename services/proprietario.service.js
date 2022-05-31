@@ -26,9 +26,18 @@ async function updateOwner(proprietario){
     return await proprietarioRepository.updateOwner(proprietario);
 }
 
+async function deleteOwner(id){
+    if(!await proprietarioRepository.getOwner(id)){
+        throw new Error("Proprietário não existe!");
+    }
+
+    await proprietarioRepository.deleteOwner(id);
+}
+
 export default {
     createOwner,
     getOwners,
     getOwner,
-    updateOwner
+    updateOwner,
+    deleteOwner,
 }

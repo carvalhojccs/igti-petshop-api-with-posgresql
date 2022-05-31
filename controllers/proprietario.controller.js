@@ -48,9 +48,21 @@ async function updateOwner(req, res, next){
     }
 }
 
+async function deleteOwner(req, res, next){
+    try {
+        console.log(req.params.id);
+        await proprietarioService.deleteOwner(req.params.id);
+        res.end();
+        logger.info(`DELETE /proprietario/:id`);
+    } catch (err) {
+        next(err);
+    }
+}
+
 export default {
     createowner,
     getOwners,
     getOwner,
     updateOwner,
+    deleteOwner,
 }
