@@ -41,7 +41,7 @@ app.use("/proprietario", proprietariosRouter);
 //configurar o handdler de erro
 app.use((err, req, res, next) => {
     console.log(req);
-    logger.error(`${req.method} ${req.baseURL} - ${err.message}`);
+    logger.error(`${req.method} ${req.baseUrl} - ${err.message}`);
     res.status(400).send({ error: err.message });
 });
 

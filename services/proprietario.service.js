@@ -18,8 +18,17 @@ async function getOwner(id){
     return proprietario;
 }
 
+async function updateOwner(proprietario){
+    if(!await proprietarioRepository.getOwner(proprietario.proprietario_id)){
+        throw new Error("Proprietario não existe!")
+    }
+
+    return await proprietarioRepository.updateOwner(proprietario);
+}
+
 export default {
     createOwner,
     getOwners,
     getOwner,
+    updateOwner
 }

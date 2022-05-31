@@ -34,8 +34,23 @@ async function getOwner(req, res, next){
     }
 }
 
+async function updateOwner(req, res, next){
+    let proprietario = req.body;
+    try {
+        if(!proprietario.proprietario_id || !proprietario.nome || !proprietario.telefone) {
+            throw new Error("Nome, Telefone e Proprietario ID são obrigatórios!");
+        }
+        proprietario = await proprietarioService.updateOwner(proprietario);
+        res.send(proprietario);
+        logger.info(`PUT /proprietario - ${JSON.stringify(proprietario)}`);
+    } catch (err) {
+        next(err);
+    }
+}
+
 export default {
     createowner,
     getOwners,
     getOwner,
+    updateOwner,
 }
